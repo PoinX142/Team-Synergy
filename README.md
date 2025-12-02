@@ -1,13 +1,28 @@
 ﻿# Team-Synergy
 
-#Many Polytechnic students struggle with crafting compelling CVs, preparation of interviews and being aware of industry expectations. We will be crafting and AI powered chatbot assistant that will be able to provide guidance to the students and thus making their CV even stronger which can in turn help them with employability.
+#Hare	I will work on building the agent for Job Mapping. 
+Under this, I hope that I will be able to:
+-	Make the agent able to identify the skillsets of the student
+-	Find relevant jobs that matches the skillsets
+-	Give correct recommendations
 
-#Hare	RAG & Data Resource Specialist – Implement Retrieval-Augmented Generation (RAG) pipelines to pull career resources from institutional databases, ensure data accuracy and compliance, assist with backend integration where needed.
+#Chris	I will work on the development of an agent that guides students in creating compelling CVs in their seeking of internship opportunities during their final year in polytechnic.
 
-#Chris	Backend Workflow Automation Specialist – Build and manage n8n workflows, implement API connections for CV analysis and interview simulation, ensure backend logic supports multi-agent functionality.
+#Charmaine	I will be working on an agent for interview simulation. The purpose of the agent is to prepare students for interview using realistic Q&A practice. Capabilities: able to generate both technical and behavioural questions, provide model answers and improvement suggestions and offer industry-specific interview practice 
 
-#Charmaine	Team Lead & Workflow Integrator – Coordinate project progress, manage integration between Botpress/Flowise chatbot and n8n workflows, oversee deployment and testing.
+#Rahul	I will be working on an agent for Motivation & Career Guidance Agent. 
+Purpose: Supports students emotionally and academically with personalised career motivation.
+Capabilities: Encourage students preparing for internships.
+Provide career pathways based on diploma.
+Suggest certifications, skills, and next steps.
+Reduce anxiety by offering uplifting messages + study tips.
 
-#Rahul	AI Model & Prompt Engineer – Fine-tune prompts for CV optimization and interview practice, configure multi-agent architecture (CV agent, Interview agent, Motivation agent), ensure ethical AI usage and compliance.
+#Gabriel	Will be working on Portfolio Review Agent
+Purpose: Helps students build a strong digital presence for employers.
+Capabilities: Rewrite LinkedIn “About Me” sections.
+Suggest profile picture, banner, and headline ideas.
+Review online portfolios or GitHub profiles.
+Provide formatting and branding recommendations.
 
-#Gabriel	Conversational AI Designer & UI/UX – Design chatbot conversation flows using Botpress/Flowise, create modular prompts for CV feedback and interview simulation, design front-end visuals and explainer assets using Canva and Firefly.
+
+
