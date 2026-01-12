@@ -3,90 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Charmaine – Interview Simulation Bot</title>
+  <title>CareerMate — Interview Simulation</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: #f9fafc;
-    }
-    header {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      background-color: #ffffff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    nav a {
-      margin: 0 0.6rem;
-      text-decoration: none;
-      color: #333;
-      font-weight: 600;
-    }
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1.2rem;
-      text-align: center;
-    }
-    section {
-      background: #ffffff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      margin-bottom: 2rem;
-    }
-    footer {
-      text-align: center;
-      padding: 1.2rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+  :root{
+    --bg:#f3f7fb;
+    --primary:#0b6e6b;
+    --accent:#ff7a59;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family:'Poppins',system-ui,Arial,sans-serif;
+    margin:0;
+    background:var(--bg);
+    color:#03303a;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 1rem;}
+  header{
+    background:linear-gradient(90deg, rgba(11,110,107,0.98), rgba(6,78,77,0.95));
+    color:#fff;
+    padding:1rem 0;
+    box-shadow:0 4px 18px rgba(2,6,23,0.08);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:1100px;margin:0 auto;padding:0 1rem;}
+  .brand{display:flex;align-items:center;gap:.75rem;font-weight:700;font-size:1.15rem}
+  .logo{width:42px;height:42px;background:#fff;border-radius:10px;display:inline-grid;place-items:center;color:var(--primary);font-weight:700}
+  nav a{color:rgba(255,255,255,0.9);text-decoration:none;margin-left:1rem;font-weight:600}
+  .hero{padding:2rem 0 0;text-align:left;max-width:760px;margin:0 auto}
+  h1.page-title{font-size:1.55rem;margin:0 0 .6rem;color:#022b2a}
+  .card{background:#ffffff;border-radius:var(--radius);padding:1.2rem;box-shadow:0 10px 30px rgba(8,19,28,0.06);border:1px solid rgba(3,48,58,0.04)}
+  .section{padding:2.25rem 0}
+  .bot-grid{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+  .btn-primary{background:var(--accent);color:#fff;padding:.6rem .95rem;border-radius:10px;font-weight:700;text-decoration:none;border:none}
+  .muted{color:var(--muted)}
+  .footer{padding:1.2rem 0;text-align:center;color:var(--muted);font-size:.95rem}
+  @media(max-width:880px){
+    .header-inner{flex-direction:column;gap:.6rem}
+    nav a{margin-left:0}
+  }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Interview Simulation Bot</h1>
-    <p>Built by Charmaine</p>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="charmaine.html">Interview Bot</a>
-    </nav>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo">CM</div>
+        <div>
+          <div style="font-size:1.05rem">CareerMate</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,0.85);font-weight:500">Guidance • CV Optimization • Interview Practice</div>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#agents">Agents</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section>
-      <h2>What this chatbot does</h2>
-      <p>
-        This Interview Simulation Bot helps Polytechnic students practise
-        Industry Immersion Programme (IIP) internship interviews.
-      </p>
-      <ul style="text-align:left;max-width:520px;margin:0 auto;">
-        <li>Realistic interview questions</li>
-        <li>Feedback after each answer</li>
-        <li>Model answers for improvement</li>
-        <li>Final interview summary</li>
-      </ul>
-    </section>
+  <main class="container">
+    <section class="section">
+      <div class="card">
+        <h1 class="page-title">Interview Simulation Agent</h1>
+        <p class="muted">Built by Charmaine — realistic mock interviews for polytechnic internships.</p>
 
-    <section>
-      <h2>How to start</h2>
-      <ol style="text-align:left;max-width:520px;margin:0 auto;">
-        <li>Provide your <strong>course</strong>, <strong>internship role</strong>,
-            <strong>difficulty</strong> (easy / medium / hard),
-            and <strong>number of questions</strong></li>
-        <li>Answer questions one by one</li>
-      </ol>
-    </section>
+        <h3 style="margin-top:1rem">What this agent does</h3>
+        <p class="muted">Practice with realistic technical and behavioural questions, receive model answers and improvement suggestions, and get tailored industry-specific practice.</p>
 
-    <section>
-      <h2>Chatbot</h2>
-      <p>
-        Click the chat button at the bottom-right corner to begin your mock interview.
-      </p>
+        <ul style="text-align:left;color:var(--muted);max-width:680px;margin:0 auto 0.6rem">
+          <li>Generates technical & behavioural questions</li>
+          <li>Provides model answers and feedback</li>
+          <li>Offers industry-specific interview sessions</li>
+        </ul>
+
+        <h3 style="margin-top:1rem">How to start</h3>
+        <ol style="text-align:left;color:var(--muted);max-width:680px;margin:0 auto 0.6rem">
+          <li>Tell the bot your <strong>course</strong>, <strong>internship role</strong>, preferred <strong>difficulty</strong> and <strong>number of questions</strong>.</li>
+          <li>Answer one question at a time, feedback and model answers will generate after.</li>
+        </ol>
+
+        <h3 style="margin-top:1rem">Begin</h3>
+        <p class="muted">Click the chat button at the bottom-right to begin a mock interview session.</p>
+      </div>
     </section>
 
     <!-- FLOWISE CHATBOT EMBED -->
@@ -100,21 +105,30 @@
           button: {
             right: 20,
             bottom: 20,
-            size: "medium"
+            size: "medium",
+            backgroundColor: "#ff7a59",
+            iconColor: "#fff"
           },
           chatWindow: {
-            title: "Interview Simulation Bot",
-            welcomeMessage:
-              "Hi! To get started, could you tell me your course, internship role, difficulty (easy/medium/hard), and number of questions?",
-            backgroundColor: "#f9fafc"
+            title: "Interview Simulation",
+            welcomeMessage: "Hi! To get started, please tell me your course, internship role, preferred difficulty (easy/medium/hard), and how many questions you'd like.",
+            backgroundColor: "#f3f7fb",
+            titleColor: "#022b2a"
           }
         }
       });
     </script>
+
+    <section id="contact" class="section">
+      <div class="card" style="text-align:center">
+        <h3>Need help?</h3>
+        <p class="muted">Contact Team Synergy for support or feature requests.</p>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    &copy; 2026 Charmaine | Team Synergy | For educational use only
+  <footer class="footer">
+    &copy; 2026 CareerMate • Built by Team Synergy • <a href="#" style="color:var(--primary);text-decoration:none">Privacy</a>
   </footer>
 </body>
 </html>

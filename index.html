@@ -3,118 +3,184 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Team Synergy – CareerMate</title>
+  <title>CareerMate — Internship & Job Prep</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9fafc;
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: #ffffff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    main {
-      max-width: 900px;
-      margin: 2.5rem auto;
-      padding: 0 1.2rem;
-      text-align: center;
-    }
-    .bot-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .bot-card {
-      background: #ffffff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
-    .bot-card h3 {
-      margin-top: 0;
-    }
-    .bot-card a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1.2rem;
-      background-color: #7f5af0;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 999px;
-      font-weight: 600;
-    }
-    .bot-card a:hover {
-      background-color: #6b47e6;
-    }
-    footer {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+  :root{
+    --bg:#f3f7fb;
+    --primary:#0b6e6b;
+    --accent:#ff7a59;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family:'Poppins',system-ui,Arial,sans-serif;
+    margin:0;
+    background:var(--bg);
+    color:#03303a;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 1rem;}
+  header{
+    background:linear-gradient(90deg, rgba(11,110,107,0.98), rgba(6,78,77,0.95));
+    color:#fff;
+    padding:1rem 0;
+    box-shadow:0 4px 18px rgba(2,6,23,0.08);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:1100px;margin:0 auto;padding:0 1rem;}
+  .brand{display:flex;align-items:center;gap:.75rem;font-weight:700;font-size:1.15rem}
+  .logo{width:42px;height:42px;background:#fff;border-radius:10px;display:inline-grid;place-items:center;color:var(--primary);font-weight:700}
+  nav a{color:rgba(255,255,255,0.9);text-decoration:none;margin-left:1rem;font-weight:600}
+  .cta{background:var(--accent);color:#fff;padding:.55rem .95rem;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(255,122,88,0.16)}
+  .hero{padding:3.5rem 0;text-align:left;max-width:760px;margin:0 auto} 
+  .hero h1{font-size:2.05rem;margin:0 0 .6rem;color:#022b2a}
+  .hero p{color:var(--muted);margin:0 0 1rem}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:#fff;padding:.75rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none;border:none;box-shadow:0 8px 24px rgba(255,122,88,0.14)}
+  .btn-outline{background:var(--accent);color:#fff;padding:.7rem 1.05rem;border-radius:10px;text-decoration:none;border:none;font-weight:700;box-shadow:0 6px 18px rgba(255,122,88,0.12)}
+  .btn-outline:hover{filter:brightness(0.95);transform:translateY(-1px);transition:all .18s ease}
+  .card{background:#ffffff;border-radius:var(--radius);padding:1.2rem;box-shadow:0 10px 30px rgba(8,19,28,0.06);border:1px solid rgba(3,48,58,0.04)}
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+  .features h3{margin:0 0 .5rem}
+  .section{padding:2.25rem 0}
+  .bot-grid{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+  .footer{padding:1.2rem 0;text-align:center;color:var(--muted);font-size:.95rem}
+  @media(max-width:880px){
+    .hero{grid-template-columns:1fr; text-align:center}
+    .header-inner{flex-direction:column;gap:.6rem}
+    nav a{margin-left:0}
+  }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Team Synergy – Multi-Agent Chatbots</h1>
-    <p>
-      This website showcases multiple AI chatbots built using Flowise.
-      Each chatbot serves a different purpose and is hosted on its own page.
-    </p>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo">CM</div>
+        <div>
+          <div style="font-size:1.05rem">CareerMate</div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,0.85);font-weight:500">Guidance • CV Optimization • Interview Practice</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#agents">Agents</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <h2>Meet Our Chatbots</h2>
-    <p>
-      Click on a chatbot below to interact with it.
-    </p>
-
-    <div class="bot-grid">
-      <div class="bot-card">
-        <h3>Interview Simulation Bot</h3>
-        <p>
-          Practise internship interview questions and receive feedback and
-          model answers after each response.
-        </p>
-        <a href="charmaine.html">Chat Now</a>
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Prepare for internships and job applications with confidence</h1>
+        <p>Personal guidance, CV optimization, and interview practice tailored for polytechnic students.</p>
+        <div class="hero-cta">
+          <a class="btn-outline" href="#features">See Features</a>
+        </div>
       </div>
+    </section>
 
-      <div class="bot-card">
-        <h3>Teammate 1 Bot</h3>
-        <p>
-          Description of teammate 1’s chatbot.
-        </p>
-        <a href="teammate1.html">Chat Now</a>
-      </div>
+    <section id="features" class="section">
+      <div class="container card">
+        <h2 style="margin:0 0 .6rem">How CareerMate helps you</h2>
+        <p style="margin:0 0 1rem;color:var(--muted)">Tailored support to boost your confidence, improve your CV, and increase your chances at interviews.</p>
 
-      <div class="bot-card">
-        <h3>Teammate 2 Bot</h3>
-        <p>
-          Description of teammate 2’s chatbot.
-        </p>
-        <a href="teammate2.html">Chat Now</a>
+        <div class="features">
+          <div class="card">
+            <h3>Personal Guidance</h3>
+            <p class="muted">One-on-one style coaching, mock interviews and feedback focused on polytechnic pathways.</p>
+          </div>
+          <div class="card">
+            <h3>CV Optimization</h3>
+            <p class="muted">Improve structure, clarity, and impact so your CV stands out to recruiters.</p>
+          </div>
+          <div class="card">
+            <h3>Interview Practice</h3>
+            <p class="muted">Practice common technical and behavioral questions with instant feedback and model answers.</p>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="bot-card">
-        <h3>Teammate 3 Bot</h3>
-        <p>
-          Description of teammate 3’s chatbot.
-        </p>
-        <a href="teammate3.html">Chat Now</a>
+    <section id="agents" class="section">
+      <h2 style="text-align:center">CareerMate Agents</h2>
+      <p style="text-align:center;color:var(--muted)">Specialised agents to guide you through job search, CVs, interviews, motivation and portfolios.</p>
+
+      <div class="bot-grid">
+        <div class="card">
+          <h3>Job Mapping Agent</h3>
+          <p>Identify your skillsets and find relevant internship/job matches with personalised recommendations.</p>
+          <ul style="text-align:left;color:var(--muted);margin:.5rem 0">
+            <li>Identify student skillsets from input or CV</li>
+            <li>Search and rank relevant job matches</li>
+            <li>Provide tailored recommendations and next steps</li>
+          </ul>
+          <a class="btn-primary" href="#">View Job Mapping</a>
+        </div>
+
+        <div class="card">
+          <h3>CV Builder Agent</h3>
+          <p>Helps students create compelling CVs targeted to internship opportunities.</p>
+          <ul style="text-align:left;color:var(--muted);margin:.5rem 0">
+            <li>Rewrite content for clarity & impact</li>
+            <li>Suggest structure and role-specific keywords</li>
+            <li>Provide examples and formatting tips</li>
+          </ul>
+          <a class="btn-primary" href="#">Open CV Builder</a>
+        </div>
+
+        <div class="card">
+          <h3>Interview Simulation Agent</h3>
+          <p>Realistic Q&amp;A practice with model answers, improvement suggestions and industry-specific sessions.</p>
+          <ul style="text-align:left;color:var(--muted);margin:.5rem 0">
+            <li>Generates technical & behavioural questions</li>
+            <li>Provides model answers and feedback</li>
+            <li>Offers industry-specific practice</li>
+          </ul>
+          <a class="btn-primary" href="charmaine.html">Start Practice</a>
+        </div>
+
+        <div class="card">
+          <h3>Motivation & Career Guidance Agent</h3>
+          <p>Personalised emotional and career support to encourage students during internship preparation.</p>
+          <ul style="text-align:left;color:var(--muted);margin:.5rem 0">
+            <li>Provides uplifting messages & study tips</li>
+            <li>Suggests career pathways by diploma</li>
+            <li>Recommends certifications and next steps</li>
+          </ul>
+          <a class="btn-primary" href="#">Talk to Guidance</a>
+        </div>
+
+        <div class="card">
+          <h3>Portfolio Review Agent</h3>
+          <p>Helps build a strong digital presence for employers.</p>
+          <ul style="text-align:left;color:var(--muted);margin:.5rem 0">
+            <li>Rewrite LinkedIn About sections</li>
+            <li>Suggest profile picture, banner and headline ideas</li>
+            <li>Review GitHub/portfolios and give branding tips</li>
+          </ul>
+          <a class="btn-primary" href="#">Get Portfolio Help</a>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="card" style="text-align:center">
+        <h3>Ready to get started?</h3>
+        <p style="color:var(--muted)">Sign up for free practice sessions and CV reviews.</p>
+        <button class="cta" type="button">Get Started</button>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    &copy; 2026 Team Synergy | Built with Flowise | For educational use only
+  <footer class="footer">
+    &copy; 2026 CareerMate • Built by Team Synergy • <a href="#" style="color:var(--primary);text-decoration:none">Privacy</a>
   </footer>
 </body>
 </html>
