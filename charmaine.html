@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charmaine – Interview Simulation Bot</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f9fafc;
+    }
+    header {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    nav a {
+      margin: 0 0.6rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.2rem;
+      text-align: center;
+    }
+    section {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1.2rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Interview Simulation Bot</h1>
+    <p>Built by Charmaine</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="charmaine.html">Interview Bot</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>What this chatbot does</h2>
+      <p>
+        This Interview Simulation Bot helps Polytechnic students practise
+        Industry Immersion Programme (IIP) internship interviews.
+      </p>
+      <ul style="text-align:left;max-width:520px;margin:0 auto;">
+        <li>Realistic interview questions</li>
+        <li>Feedback after each answer</li>
+        <li>Model answers for improvement</li>
+        <li>Final interview summary</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How to start</h2>
+      <ol style="text-align:left;max-width:520px;margin:0 auto;">
+        <li>Provide your <strong>course</strong>, <strong>internship role</strong>,
+            <strong>difficulty</strong> (easy / medium / hard),
+            and <strong>number of questions</strong></li>
+        <li>Answer questions one by one</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Chatbot</h2>
+      <p>
+        Click the chat button at the bottom-right corner to begin your mock interview.
+      </p>
+    </section>
+
+    <!-- FLOWISE CHATBOT EMBED -->
+    <script type="module">
+      import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+
+      Chatbot.init({
+        chatflowid: "1b4333d6-0870-425f-8b31-5539816d97b2",
+        apiHost: "https://cloud.flowiseai.com",
+        theme: {
+          button: {
+            right: 20,
+            bottom: 20,
+            size: "medium"
+          },
+          chatWindow: {
+            title: "Interview Simulation Bot",
+            welcomeMessage:
+              "Hi! To get started, could you tell me your course, internship role, difficulty (easy/medium/hard), and number of questions?",
+            backgroundColor: "#f9fafc"
+          }
+        }
+      });
+    </script>
+  </main>
+
+  <footer>
+    &copy; 2026 Charmaine | Team Synergy | For educational use only
+  </footer>
+</body>
+</html>
