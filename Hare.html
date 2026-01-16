@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Learning Portal</title>
+  <title>CareerMate Portal</title>
 
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -77,7 +77,7 @@
         <div class="brand">
           <div class="logo">📚</div>
           <div>
-            <div style="font-size:1.05rem">Student Portal</div>
+            <div style="font-size:1.05rem">CareerMate</div>
             <div style="font-size:.78rem;color:rgba(255,255,255,0.85);font-weight:500">Learn • Grow • Succeed</div>
           </div>
         </div>
@@ -97,7 +97,7 @@
         <p>Explore jobs, access resources, and unlock your potential at your internship.</p>
         <div class="hero-cta"></div>
     </section>
-
+    
     <section id="job-mapping" class="section">
       <div class="container">
         <h2>Career Mapping for Your Internship</h2>
@@ -119,6 +119,8 @@
           </div>
 
           <p style="color:var(--muted);margin:1.5rem 0 0;font-size:0.95rem">💡 <strong>Pro tip:</strong> The more details you provide, the more accurate and personalized your internship recommendations will be. Start chatting now to discover opportunities that align with your goals!</p>
+          
+          <button style="margin-top:1.5rem;padding:0.75rem 2rem;background:var(--accent);color:#ffffff;border:none;border-radius:var(--radius);font-weight:600;font-size:1rem;cursor:pointer;transition:background 0.3s ease" onclick="window.location.href='Flowise.html'">🚀 Chat with AI Chatbot</button>
         </div>
 
         <div class="course-grid">
@@ -185,14 +187,10 @@
       </div>
     </section>
     
-
-  <footer class="footer">
-    <p>&copy; 2026 Student Portal. All rights reserved.</p>
-  </footer>
-
-  <script type="module">
+<flowise-fullchatbot></flowise-fullchatbot>
+<script type="module">
     import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
-    Chatbot.init({
+    Chatbot.initFull({
         chatflowid: "b4c21091-4dc3-42d0-8b0c-ec193143dd54",
         apiHost: "https://cloud.flowiseai.com",
         chatflowConfig: {
@@ -243,12 +241,12 @@
                 errorMessage: 'This is a error message',
                 backgroundColor: '#ffffff',
                 backgroundImage: 'enter image path or link',
-                height: 700,
-                width: 400,
+                height: '100%',
+                width: '100%',
                 fontSize: 16,
                 starterPrompts: [
-                    "I need help?",
-                    "Assist with job mapping?"
+                    "Assist me in finding internship opportunities.",
+                    "I need help to mtch my skills with job roles."
                 ],
                 starterPromptFontSize: 15,
                 clearChatOnReload: false,
@@ -296,6 +294,10 @@
         }
     })
 </script>
+
+  <footer class="footer">
+    <p>&copy; 2026 Student Portal. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
