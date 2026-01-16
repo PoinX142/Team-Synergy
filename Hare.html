@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Learning Portal</title>
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+  :root{
+    --bg:#f3f7fb;
+    --primary:#0b6e6b;
+    --accent:#ff7a59;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family:'Poppins',system-ui,Arial,sans-serif;
+    margin:0;
+    background:var(--bg);
+    color:#03303a;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 1rem;}
+  header{
+    background:linear-gradient(90deg, rgba(11,110,107,0.98), rgba(6,78,77,0.95));
+    color:#fff;
+    padding:1rem 0;
+    box-shadow:0 4px 18px rgba(2,6,23,0.08);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:1100px;margin:0 auto;padding:0 1rem;}
+  .brand{display:flex;align-items:center;gap:.75rem;font-weight:700;font-size:1.15rem}
+  .logo{width:42px;height:42px;background:#fff;border-radius:10px;display:inline-grid;place-items:center;color:var(--primary);font-weight:700;font-size:.9rem}
+  nav a{color:rgba(255,255,255,0.9);text-decoration:none;margin-left:1rem;font-weight:600}
+  nav a:hover{color:#fff}
+  .cta{background:var(--accent);color:#fff;padding:.55rem .95rem;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(255,122,88,0.16)}
+  .hero{padding:3.5rem 0 1rem 0;text-align:left} 
+  .hero h1{font-size:2.05rem;margin:0 0 .6rem;color:#022b2a}
+  .hero p{color:var(--muted);margin:0 0 1rem}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:#fff;padding:.75rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none;border:none;box-shadow:0 8px 24px rgba(255,122,88,0.14);cursor:pointer}
+  .btn-primary:hover{filter:brightness(0.95);transform:translateY(-1px);transition:all .18s ease}
+  .btn-outline{background:transparent;color:var(--accent);padding:.7rem 1.05rem;border-radius:10px;text-decoration:none;border:2px solid var(--accent);font-weight:700;box-shadow:none;cursor:pointer}
+  .btn-outline:hover{background:var(--accent);color:#fff;transition:all .18s ease}
+  .card{background:#ffffff;border-radius:var(--radius);padding:1.2rem;box-shadow:0 10px 30px rgba(8,19,28,0.06);border:1px solid rgba(3,48,58,0.04)}
+  .section{padding:2.25rem 0}
+  .course-grid{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+  .course-card{background:#ffffff;border-radius:var(--radius);padding:1.2rem;box-shadow:0 10px 30px rgba(8,19,28,0.06);border:1px solid rgba(3,48,58,0.04)}
+  .course-card h3{margin:0 0 .5rem;color:var(--primary)}
+  .course-card p{color:var(--muted);margin:0 0 1rem}
+  .resource-grid{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+  .resource-item{background:#ffffff;border-radius:var(--radius);padding:1.2rem;box-shadow:0 10px 30px rgba(8,19,28,0.06);border:1px solid rgba(3,48,58,0.04);border-left:4px solid var(--accent)}
+  .resource-item h4{margin:0 0 .5rem;color:var(--primary)}
+  .resource-item p{color:var(--muted);margin:0}
+  .contact-form{background:#ffffff;border-radius:var(--radius);padding:2rem;box-shadow:0 10px 30px rgba(8,19,28,0.06);max-width:600px;margin:2rem auto 0}
+  .contact-form input,.contact-form textarea{width:100%;padding:.75rem;margin-bottom:1rem;border:1px solid rgba(3,48,58,0.1);border-radius:8px;font-family:inherit;font-size:.95rem}
+  .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(11,110,107,0.1)}
+  .section h2{font-size:1.75rem;margin:0 0 .6rem;color:#022b2a}
+  .section > .container > p{color:var(--muted);margin:0 0 1rem}
+  .footer{padding:1.2rem 0;text-align:center;color:var(--muted);font-size:.95rem}
+  @media(max-width:880px){
+    .header-inner{flex-direction:column;gap:.6rem;text-align:center}
+    nav a{margin-left:0;margin-right:1rem}
+    .hero{text-align:center}
+    .hero h1{font-size:1.5rem}
+  }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:.75rem">
+        <div class="brand">
+          <div class="logo">📚</div>
+          <div>
+            <div style="font-size:1.05rem">Student Portal</div>
+            <div style="font-size:.78rem;color:rgba(255,255,255,0.85);font-weight:500">Learn • Grow • Succeed</div>
+          </div>
+        </div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#agents">Agents</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Job Mapping</h1>
+        <p>Explore jobs, access resources, and unlock your potential at your internship.</p>
+        <div class="hero-cta"></div>
+    </section>
+
+    <section id="job-mapping" class="section">
+      <div class="container">
+        <h2>Career Mapping for Your Internship</h2>
+        <p style="color:var(--muted)">Discover career paths aligned with your skills and internship goals.</p>
+
+        <div style="margin-bottom:3rem;padding:2rem;background:linear-gradient(135deg, rgba(11,110,107,0.08), rgba(255,122,88,0.08));border-radius:var(--radius);border:2px solid rgba(11,110,107,0.1)">
+          <h3 style="color:var(--primary);margin:0 0 1rem">🤖 Job Mapping AI Chatbot</h3>
+          <p style="color:var(--muted);margin:0 0 1.5rem">Our intelligent AI chatbot is ready to help you find the best internship matches tailored to your profile. Simply share some key information about yourself, and get personalized career recommendations!</p>
+          
+          <div style="background:#ffffff;border-radius:10px;padding:1.5rem;border-left:4px solid var(--accent)">
+            <p style="font-weight:600;color:var(--primary);margin:0 0 1rem">To find the best internship matches for you, please share:</p>
+            <ul style="color:var(--muted);margin:0;padding-left:1.5rem;line-height:1.8">
+              <li><strong>Year of study / Expected graduation</strong> (e.g., 2nd year, 3rd year, or just finished)</li>
+              <li><strong>Work/internship or project experience</strong> you've had so far (even part-time or volunteer)</li>
+              <li><strong>Technical skills</strong> you're comfortable with (e.g., Python, SQL, blockchain, Excel, financial modelling)</li>
+              <li><strong>Soft skills or strengths</strong> you'd like to highlight (e.g., analytical thinking, teamwork, communication)</li>
+              <li><strong>Industry or role preferences</strong> (e.g., fintech product, risk analytics, data science, compliance)</li>
+            </ul>
+          </div>
+
+          <p style="color:var(--muted);margin:1.5rem 0 0;font-size:0.95rem">💡 <strong>Pro tip:</strong> The more details you provide, the more accurate and personalized your internship recommendations will be. Start chatting now to discover opportunities that align with your goals!</p>
+        </div>
+
+        <div class="course-grid">
+          <div class="card">
+            <h3>🎯 Skill Assessment</h3>
+            <p style="color:var(--muted)">Identify your core competencies and technical skills through our interactive assessment tools. Understand what makes you unique in the job market.</p>
+            <ul style="color:var(--muted);margin:0;padding-left:1.2rem">
+              <li>Self-evaluation questionnaires</li>
+              <li>Technical aptitude tests</li>
+              <li>Soft skills analysis</li>
+            </ul>
+          </div>
+          
+          <div class="card">
+            <h3>💼 Job Market Insights</h3>
+            <p style="color:var(--muted)">Explore current job trends and in-demand roles in your field. Learn what employers are looking for in internship candidates.</p>
+            <ul style="color:var(--muted);margin:0;padding-left:1.2rem">
+              <li>Industry salary benchmarks</li>
+              <li>Trending tech stacks & tools</li>
+              <li>Company culture insights</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>📋 Resume & Portfolio Building</h3>
+            <p style="color:var(--muted)">Craft compelling application materials that showcase your internship projects and achievements to potential employers.</p>
+            <ul style="color:var(--muted);margin:0;padding-left:1.2rem">
+              <li>Resume templates & tips</li>
+              <li>Portfolio project showcases</li>
+              <li>LinkedIn optimization guide</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>🤝 Networking & Mentorship</h3>
+            <p style="color:var(--muted)">Connect with industry professionals and alumni. Gain mentorship to accelerate your career development during your internship.</p>
+            <ul style="color:var(--muted);margin:0;padding-left:1.2rem">
+              <li>Mentor matching program</li>
+              <li>Industry networking events</li>
+              <li>Alumni success stories</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>📚 Learning Pathways</h3>
+            <p style="color:var(--muted)">Follow structured learning paths tailored to your internship role. Acquire the skills needed to excel in your chosen career.</p>
+            <ul style="color:var(--muted);margin:0;padding-left:1.2rem">
+              <li>Role-based skill courses</li>
+              <li>Certification programs</li>
+              <li>Hands-on project labs</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>🚀 Career Next Steps</h3>
+            <p style="color:var(--muted)">Plan your post-internship strategy. Convert your internship into full-time opportunities or explore advanced career options.</p>
+            <ul style="color:var(--muted);margin:0;padding-left:1.2rem">
+              <li>Job application strategies</li>
+              <li>Interview preparation</li>
+              <li>Salary negotiation guide</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+  <footer class="footer">
+    <p>&copy; 2026 Student Portal. All rights reserved.</p>
+  </footer>
+
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+    Chatbot.init({
+        chatflowid: "b4c21091-4dc3-42d0-8b0c-ec193143dd54",
+        apiHost: "https://cloud.flowiseai.com",
+        chatflowConfig: {
+            /* Chatflow Config */
+        },
+        observersConfig: {
+            /* Observers Config */
+        },
+        theme: {
+            button: {
+                backgroundColor: '#3B81F6',
+                right: 20,
+                bottom: 20,
+                size: 48,
+                dragAndDrop: true,
+                iconColor: 'white',
+                customIconSrc: 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/google-messages.svg',
+                autoWindowOpen: {
+                    autoOpen: true,
+                    openDelay: 2,
+                    autoOpenOnMobile: false
+                }
+            },
+            tooltip: {
+                showTooltip: true,
+                tooltipMessage: 'Hi There 👋!',
+                tooltipBackgroundColor: 'black',
+                tooltipTextColor: 'white',
+                tooltipFontSize: 16
+            },
+            disclaimer: {
+                title: 'Disclaimer',
+                message: "By using this chatbot, you agree to the <a target=\"_blank\" href=\"https://flowiseai.com/terms\">Terms & Condition</a>",
+                textColor: 'black',
+                buttonColor: '#3b82f6',
+                buttonText: 'Start Chatting',
+                buttonTextColor: 'white',
+                blurredBackgroundColor: 'rgba(0, 0, 0, 0.4)',
+                backgroundColor: 'white'
+            },
+            customCSS: ``,
+            chatWindow: {
+                showTitle: true,
+                showAgentMessages: true,
+                title: 'Flowise Bot',
+                titleAvatarSrc: 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/google-messages.svg',
+                welcomeMessage: 'Hello! How can I assist you today?',
+                errorMessage: 'This is a error message',
+                backgroundColor: '#ffffff',
+                backgroundImage: 'enter image path or link',
+                height: 700,
+                width: 400,
+                fontSize: 16,
+                starterPrompts: [
+                    "I need help?",
+                    "Assist with job mapping?"
+                ],
+                starterPromptFontSize: 15,
+                clearChatOnReload: false,
+                sourceDocsTitle: 'Sources:',
+                renderHTML: true,
+                botMessage: {
+                    backgroundColor: '#f7f8ff',
+                    textColor: '#303235',
+                    showAvatar: true,
+                    avatarSrc: 'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/parroticon.png'
+                },
+                userMessage: {
+                    backgroundColor: '#3B81F6',
+                    textColor: '#ffffff',
+                    showAvatar: true,
+                    avatarSrc: 'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/usericon.png'
+                },
+                textInput: {
+                    placeholder: 'Type your question',
+                    backgroundColor: '#ffffff',
+                    textColor: '#303235',
+                    sendButtonColor: '#3B81F6',
+                    maxChars: 5000,
+                    maxCharsWarningMessage: 'You exceeded the characters limit. Please input less than 5000 characters.',
+                    autoFocus: true,
+                    sendMessageSound: true,
+                    sendSoundLocation: 'send_message.mp3',
+                    receiveMessageSound: true,
+                    receiveSoundLocation: 'receive_message.mp3'
+                },
+                feedback: {
+                    color: '#303235'
+                },
+                dateTimeToggle: {
+                    date: true,
+                    time: true
+                },
+                footer: {
+                    textColor: '#303235',
+                    text: 'Powered by',
+                    company: 'Flowise',
+                    companyLink: 'https://flowiseai.com'
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
