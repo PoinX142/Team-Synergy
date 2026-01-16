@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+        name="description"
+        content="AI-powered CV suggestions chatbot to help students land their dream internships and jobs."
+    />
+    <meta name="theme-color" content="#00A8CC" />
+    <title>Careermate - CV Suggestions</title>
+
+    <!-- Inline CSS for the fixed top navbar and responsive behavior -->
+    <style>
+        /* --- Base Reset & Layout Helpers --- */
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        :root {
+          --brand: #00A8CC;
+          --bg: #ffffff;
+          --text: #0f172a;      /* Slate-900 */
+          --muted: #475569;     /* Slate-600 */
+          --shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+
+        /* --- Fixed Top Navbar --- */
+        .navbar {
+          position: fixed;               /* stick to top */
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;                 /* above content */
+          background: var(--bg);
+          border-bottom: 1px solid rgba(0,0,0,0.06);
+          box-shadow: var(--shadow);     /* subtle elevation */
+        }
+
+        .navbar-container {
+          max-width: 1100px;             /* center the content */
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 12px 20px;
+        }
+
+        /* --- Logo --- */
+        .logo h1 {
+          font-size: 1.25rem;
+          margin: 0;
+          color: var(--text);
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .logo h1::after {
+          content: "Beta";
+          font-size: 0.75rem;
+          color: var(--muted);
+          margin-left: 8px;
+        }
+
+        /* --- Nav Menu --- */
+        .nav-menu ul {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .nav-link {
+          text-decoration: none;
+          color: var(--text);
+          font-weight: 600;
+          padding: 8px 12px;
+          border-radius: 8px;
+          transition: color 160ms ease, background 160ms ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+          color: #0a0a0a;
+          background: rgba(0, 168, 204, 0.12);
+        }
+
+        /* CTA link style (optional) */
+        .cta-link {
+          background: var(--brand);
+          color: #fff;
+        }
+        .cta-link:hover {
+          background: #008fb0;
+        }
+
+        /* --- Hamburger Button --- */
+        .menu-toggle {
+          display: none;                  /* hidden on desktop */
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          width: 40px;
+          height: 40px;
+          border: 1px solid rgba(0,0,0,0.1);
+          background: var(--bg);
+          border-radius: 10px;
+          cursor: pointer;
+          transition: background 160ms ease, transform 160ms ease;
+        }
+        .menu-toggle:hover { background: rgba(0,0,0,0.04); }
+        .menu-toggle:active { transform: scale(0.98); }
+
+        .menu-toggle span {
+          display: block;
+          width: 18px;
+          height: 2px;
+          background: var(--text);
+          border-radius: 2px;
+          transition: transform 200ms ease, opacity 200ms ease;
+        }
+
+        /* --- Mobile nav state when open --- */
+        .nav-open .menu-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .nav-open .menu-toggle span:nth-child(2) { opacity: 0; }
+        .nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        /* --- Push page content down to avoid overlap with fixed navbar --- */
+        body {
+          /* Adjust this offset to match navbar height */
+          padding-top: 64px; /* ~ header height */
+          font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+          color: var(--text);
+          background: #fafafa;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+          min-height: 50vh;
+          display: grid;
+          place-items: center;
+          padding: 40px 20px;
+          background: linear-gradient(180deg, rgba(0,168,204,0.08), transparent);
+        }
+        .hero-content h2 { margin: 0 0 8px; font-size: 2rem; }
+        .hero-content p { margin: 0 0 16px; color: var(--muted); }
+        .cta-button {
+          background: var(--brand);
+          color: #fff;
+          border: none;
+          border-radius: 10px;
+          padding: 12px 16px;
+          font-weight: 700;
+          cursor: pointer;
+          box-shadow: var(--shadow);
+        }
+        .cta-button:hover { background: #008fb0; }
+
+        /* --- Main Container --- */
+        .container {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+
+        /* --- Instructions Section --- */
+        .section { margin-bottom: 32px; }
+        .instructions-card {
+          background: #fff;
+          border-radius: 16px;
+          box-shadow: var(--shadow);
+          padding: 20px;
+        }
+        .instructions-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-top: 12px;
+        }
+        .instruction-item {
+          background: #f7fafc;
+          border: 1px solid rgba(0,0,0,0.06);
+          border-radius: 12px;
+          padding: 16px;
+        }
+        .step-number { font-weight: 700; color: var(--brand); }
+        .instruction-item h3 { margin: 8px 0; }
+
+        /* --- Chat Section --- */
+        .chat-section h2 { margin-bottom: 12px; }
+
+        /* --- Footer --- */
+        .footer {
+          margin-top: 24px;
+          padding: 24px 20px;
+          text-align: center;
+          background: #fff;
+          border-top: 1px solid rgba(0,0,0,0.06);
+        }
+        .footer p { margin: 4px 0; color: var(--muted); }
+        .footer-links {
+          margin-top: 8px;
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+        }
+        .footer-links a {
+          color: var(--text);
+          text-decoration: none;
+          font-weight: 600;
+        }
+
+        /* --- Responsive: Collapse nav on small screens --- */
+        @media (max-width: 768px) {
+          .nav-menu {
+            position: absolute;
+            top: 64px;                    /* below navbar */
+            left: 0;
+            right: 0;
+            background: var(--bg);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            box-shadow: var(--shadow);
+            display: none;                /* hidden by default */
+          }
+          .nav-open .nav-menu { display: block; }
+
+          .nav-menu ul {
+            flex-direction: column;
+            gap: 0;
+          }
+          .nav-menu li {
+            border-top: 1px solid rgba(0,0,0,0.06);
+          }
+          .nav-link {
+            display: block;
+            padding: 14px 20px;
+            border-radius: 0;
+          }
+
+          .menu-toggle { display: flex; } /* show hamburger on mobile */
+
+          .instructions-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Navigation -->
+    <header class="navbar" role="banner">
+        <div class="navbar-container">
+            <div class="logo">
+                <h1>📄 Careermate - CV Suggestions</h1>
+            </div>
+
+            <nav class="nav-menu" id="primaryNav" aria-label="Primary navigation">
+                <ul>
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#chat" class="nav-link">CV Chatbot</a></li>
+                    <li><a href="#chat" class="nav-link cta-link">Start Now</a></li>
+                </ul>
+            </nav>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Toggle menu"
+                aria-controls="primaryNav"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home" role="region" aria-label="Hero">
+        <div class="hero-content">
+            <h2>🚀 Land Your Dream Internship</h2>
+            <p>Get AI-powered suggestions to improve your CV and ace your job search.</p>
+            <button class="cta-button" id="getStartedBtn">Start Now</button>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        <!-- Instructions Section -->
+        <section class="section instructions-section" aria-label="How it works">
+            <div class="instructions-card">
+                <h2>📋 How It Works</h2>
+                <div class="instructions-grid">
+                    <div class="instruction-item">
+                        <div class="step-number">1️⃣</div>
+                        <h3>Upload Your CV</h3>
+                        <p>Click the chatbot below and upload your CV or resume file (PDF, DOCX, TXT)</p>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="step-number">2️⃣</div>
+                        <h3>AI Analysis</h3>
+                        <p>Our AI analyzes your CV for strengths, weaknesses, and areas for improvement</p>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="step-number">3️⃣</div>
+                        <h3>Get Suggestions</h3>
+                        <p>Receive personalized recommendations to enhance your CV and land your dream job</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot Section -->
+        <section id="chat" class="section chat-section" aria-label="CV Chatbot">
+            <h2>💬 CV Chatbot</h2>
+            <flowise-fullchatbot></flowise-fullchatbot>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <p>© 2026 <strong> Careermate - CV Suggestions</strong> - AI-Powered Career Guidance for Students</p>
+        <p class="footer-tagline">Help every student succeed in their internship and job search journey</p>
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- JS: Navbar toggle, smooth scroll, active link highlighting -->
+    <script>
+        // --- Nav toggle for mobile ---
+        const menuToggle = document.getElementById('menuToggle');
+        const bodyEl = document.body;
+
+        if (menuToggle) {
+          menuToggle.addEventListener('click', () => {
+            const isOpen = bodyEl.classList.toggle('nav-open');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+          });
+        }
+
+        // --- Close mobile nav when a link is clicked ---
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            bodyEl.classList.remove('nav-open');
+            menuToggle?.setAttribute('aria-expanded', 'false');
+          });
+        });
+
+        // --- Smooth scroll for internal links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', (e) => {
+            const targetId = anchor.getAttribute('href').substring(1);
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) return;
+            e.preventDefault();
+
+            // Adjust for fixed header offset
+            const headerOffset = 64; // match CSS padding-top
+            const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = elementPosition - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          });
+        });
+
+        // --- Active link highlighting on scroll ---
+        const sections = Array.from(document.querySelectorAll('section[id]'));
+        const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+
+        function onScroll() {
+          const headerOffset = 72;
+          const scrollPos = window.scrollY + headerOffset;
+
+          let currentId = null;
+          for (const sec of sections) {
+            const top = sec.offsetTop;
+            const height = sec.offsetHeight;
+            if (scrollPos >= top && scrollPos < top + height) {
+              currentId = sec.id;
+              break;
+            }
+          }
+
+          navLinks.forEach(link => {
+            const href = link.getAttribute('href') || '';
+            const id = href.startsWith('#') ? href.slice(1) : '';
+            link.classList.toggle('active', id === currentId);
+          });
+        }
+
+        window.addEventListener('scroll', onScroll);
+        window.addEventListener('load', onScroll);
+
+        // --- Optional: "Start Now" button scroll to chatbot ---
+        document.getElementById('getStartedBtn')?.addEventListener('click', () => {
+          const targetEl = document.getElementById('chat');
+          if (!targetEl) return;
+          const headerOffset = 64;
+          const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        });
+    </script>
+
+    <!-- Flowise Full Chatbot -->
+    <script type="module">
+        import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+
+        try {
+            Chatbot.initFull({
+                chatflowid: "bf9aeb4b-3b74-4ffb-b133-8d4ff7c3a0f6",
+                apiHost: "https://cloud.flowiseai.com",
+                theme: {
+                    chatWindow: {
+                        title: "CV Coach",
+                        showTitle: true,
+                        welcomeMessage: "Upload your CV (PDF/DOCX/TXT) and tell me the role you are applying for.",
+                        renderHTML: true,
+                        textInput: {
+                            placeholder: "Ask for CV improvements...",
+                            autoFocus: true
+                        },
+                        botMessage: {
+                            showAvatar: true
+                        },
+                        userMessage: {
+                            showAvatar: true
+                        }
+                    }
+                }
+            });
+
+            console.log("✅ Flowwise chatbot initialized successfully");
+        } catch (error) {
+            console.error("❌ Error initializing Flowwise chatbot:", error);
+        }
+    </script>
+</body>
+</html>
