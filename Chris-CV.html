@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-powered CV suggestions chatbot to help students land their dream internships and jobs." />
+  <meta name="theme-color" content="#00A8CC" />
+  <title>Careermate - CV Suggestions</title>
+
+  <style>
+    /* --- Base Reset & Layout Helpers --- */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    :root{
+      --brand:#00A8CC;
+      --brand-2:#0b6e6b; /* optional accent */
+      --bg:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --shadow:0 10px 30px rgba(2,6,23,0.08);
+      --shadow-soft:0 6px 18px rgba(2,6,23,0.08);
+      --radius:14px;
+    }
+
+    /* --- Push page content down to avoid overlap with fixed navbar --- */
+    body{
+      padding-top: 78px; /* slightly taller header now */
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+      color: var(--text);
+      background: #fafafa;
+    }
+
+    /* =========================
+       NICE NAVBAR (UPDATED)
+       ========================= */
+    .navbar{
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(15,23,42,0.08);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .navbar-container{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand-link{
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+
+    .brand-mark{
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(0,168,204,0.18), rgba(0,168,204,0.06));
+      border: 1px solid rgba(0,168,204,0.25);
+      box-shadow: 0 10px 26px rgba(0,168,204,0.16);
+      font-size: 20px;
+    }
+
+    .brand-text{
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand-title{
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      font-size: 1.02rem;
+    }
+    .brand-subtitle{
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .nav-menu{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-pills{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15,23,42,0.04);
+      border: 1px solid rgba(15,23,42,0.06);
+      padding: 6px;
+      border-radius: 999px;
+    }
+
+    .nav-link{
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 9px 12px;
+      border-radius: 999px;
+      transition: background 160ms ease, transform 160ms ease, color 160ms ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link:hover{
+      background: rgba(0,168,204,0.12);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.active{
+      background: rgba(0,168,204,0.16);
+      color: #071018;
+    }
+
+    .nav-cta{
+      text-decoration: none;
+      font-weight: 800;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), #008fb0);
+      box-shadow: 0 12px 26px rgba(0,168,204,0.28);
+      transition: transform 160ms ease, filter 160ms ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-cta:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+    }
+
+    /* Hamburger */
+    .menu-toggle{
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(15,23,42,0.10);
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 10px 20px rgba(2,6,23,0.08);
+      cursor: pointer;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+    }
+    .menu-toggle span{
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      position: relative;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .menu-toggle span::before,
+    .menu-toggle span::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .menu-toggle span::before{ top: -6px; }
+    .menu-toggle span::after{ top: 6px; }
+
+    .nav-open .menu-toggle span{
+      background: transparent;
+    }
+    .nav-open .menu-toggle span::before{
+      transform: translateY(6px) rotate(45deg);
+    }
+    .nav-open .menu-toggle span::after{
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* Mobile */
+    @media (max-width: 820px){
+      body{ padding-top: 86px; }
+
+      .menu-toggle{ display: inline-flex; }
+
+      .nav-menu{
+        position: absolute;
+        top: 70px;
+        left: 12px;
+        right: 12px;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(15,23,42,0.08);
+        box-shadow: var(--shadow);
+      }
+      .nav-open .nav-menu{ display: flex; }
+
+      .nav-pills{
+        width: 100%;
+        justify-content: stretch;
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 10px;
+      }
+      .nav-link{
+        width: 100%;
+        justify-content: space-between;
+        border-radius: 12px;
+        padding: 12px 14px;
+      }
+      .nav-cta{
+        width: 100%;
+        justify-content: center;
+        padding: 12px 14px;
+      }
+
+      .brand-link{ min-width: auto; }
+      .brand-subtitle{ display: none; }
+    }
+
+    /* --- Hero Section --- */
+    .hero{
+      min-height: 50vh;
+      display: grid;
+      place-items: center;
+      padding: 40px 20px;
+      background: linear-gradient(180deg, rgba(0,168,204,0.08), transparent);
+    }
+    .hero-content h2{ margin: 0 0 8px; font-size: 2rem; }
+    .hero-content p{ margin: 0 0 16px; color: var(--muted); }
+    .cta-button{
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+    }
+    .cta-button:hover{ background: #008fb0; }
+
+    /* --- Main Container --- */
+    .container{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* --- Instructions Section --- */
+    .section{ margin-bottom: 32px; }
+    .instructions-card{
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft);
+      padding: 20px;
+      border: 1px solid rgba(15,23,42,0.06);
+    }
+    .instructions-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .instruction-item{
+      background: #f7fafc;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .step-number{ font-weight: 800; color: var(--brand); }
+    .instruction-item h3{ margin: 8px 0; }
+
+    @media (max-width: 768px){
+      .instructions-grid{ grid-template-columns: 1fr; }
+    }
+
+    /* --- Footer --- */
+    .footer{
+      margin-top: 24px;
+      padding: 24px 20px;
+      text-align: center;
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .footer p{ margin: 4px 0; color: var(--muted); }
+    .footer-links{
+      margin-top: 8px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .footer-links a{
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Nicer Navbar (uses your existing JS toggle) -->
+  <header class="navbar" role="banner">
+    <div class="navbar-container">
+      <a href="index.html" class="brand-link" aria-label="Go to homepage">
+        <div class="brand-mark">📄</div>
+        <div class="brand-text">
+          <div class="brand-title">Careermate</div>
+          <div class="brand-subtitle">CV Suggestions • Students • Internships</div>
+        </div>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Toggle menu"
+        aria-controls="primaryNav"
+        aria-expanded="false"
+        type="button"
+      >
+        <span></span>
+      </button>
+
+      <nav class="nav-menu" id="primaryNav" aria-label="Primary navigation">
+        <div class="nav-pills">
+          <a href="index.html" class="nav-link">🏠 Home</a>
+          <a href="index.html#agents" class="nav-link">🤖 Agents</a>
+          <a href="index.html#contact" class="nav-link">✉️ Contact</a>
+        </div>
+        <a href="#chat" class="nav-cta">Start Now →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home" role="region" aria-label="Hero">
+    <div class="hero-content">
+      <h2>🚀 Land Your Dream Internship</h2>
+      <p>Get AI-powered suggestions to improve your CV and ace your job search.</p>
+      <button class="cta-button" id="getStartedBtn">Start Now</button>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    <section class="section instructions-section" aria-label="How it works">
+      <div class="instructions-card">
+        <h2>📋 How It Works</h2>
+        <div class="instructions-grid">
+          <div class="instruction-item">
+            <div class="step-number">1️⃣</div>
+            <h3>Upload Your CV</h3>
+            <p>Click the chatbot below and upload your CV or resume file (PDF, DOCX, TXT)</p>
+          </div>
+          <div class="instruction-item">
+            <div class="step-number">2️⃣</div>
+            <h3>AI Analysis</h3>
+            <p>Our AI analyzes your CV for strengths, weaknesses, and areas for improvement</p>
+          </div>
+          <div class="instruction-item">
+            <div class="step-number">3️⃣</div>
+            <h3>Get Suggestions</h3>
+            <p>Receive personalized recommendations to enhance your CV and land your dream job</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="chat" class="section chat-section" aria-label="CV Chatbot">
+      <h2>💬 CV Chatbot</h2>
+      <flowise-fullchatbot></flowise-fullchatbot>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <p>© 2026 <strong>Careermate - CV Suggestions</strong> - AI-Powered Career Guidance for Students</p>
+    <p class="footer-tagline">Help every student succeed in their internship and job search journey</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#agents">Agents</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="#privacy">Privacy</a>
+    </div>
+  </footer>
+
+  <!-- JS: Navbar toggle, smooth scroll, active link highlighting -->
+  <script>
+    // --- Nav toggle for mobile ---
+    const menuToggle = document.getElementById('menuToggle');
+    const bodyEl = document.body;
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = bodyEl.classList.toggle('nav-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+
+    // --- Smooth scroll for internal links ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const targetId = anchor.getAttribute('href').substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+        e.preventDefault();
+
+        const headerOffset = 80; // match new navbar height
+        const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+
+        // close mobile menu after click
+        bodyEl.classList.remove('nav-open');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // --- Optional: "Start Now" button scroll to chatbot ---
+    document.getElementById('getStartedBtn')?.addEventListener('click', () => {
+      const targetEl = document.getElementById('chat');
+      if (!targetEl) return;
+      const headerOffset = 80;
+      const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    });
+  </script>
+
+  <!-- Flowise Full Chatbot -->
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+
+    try {
+      Chatbot.initFull({
+        chatflowid: "bf9aeb4b-3b74-4ffb-b133-8d4ff7c3a0f6",
+        apiHost: "https://cloud.flowiseai.com",
+        theme: {
+          chatWindow: {
+            title: "CV Coach",
+            showTitle: true,
+            welcomeMessage: "Upload your CV (PDF/DOCX/TXT) and tell me the role you are applying for.",
+            renderHTML: true,
+            textInput: { placeholder: "Ask for CV improvements...", autoFocus: true },
+            botMessage: { showAvatar: true },
+            userMessage: { showAvatar: true }
+          }
+        }
+      });
+
+      console.log("✅ Flowwise chatbot initialized successfully");
+    } catch (error) {
+      console.error("❌ Error initializing Flowwise chatbot:", error);
+    }
+  </script>
+</body>
+</html>
